@@ -1,0 +1,19 @@
+<?php
+class metatags{
+	public function metatags(){
+		$desc = pq('meta[name="description"]')->attr('content');
+		$len = strlen($desc);
+		
+		if($len > 165){
+			theme::display("Your meta description is too long! You have $len characters.");
+		}else if ($len < 50){
+			theme::display("Your meta description is too short! You have $len characters.");
+		}else{
+			theme::display("Your meta description is just right! You have $len characters.");
+		}
+		
+		//score::add(SCORE, WEIGHT)
+	}
+}
+
+?>

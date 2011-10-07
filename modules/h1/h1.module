@@ -1,0 +1,21 @@
+<?php
+
+class h1{
+	public function h1(){
+		$h1s = array();
+		foreach(pq('h1') as $h1){
+			array_push($h1s, $h1);
+		}
+		
+		$count = count($h1s);
+		
+		if($count > 1){
+			theme::display("Your H1s are not optimized, you have $count");
+		}else{
+			theme::display("Your H1s are optimized! You have $count");
+		}
+	}
+}
+
+
+?>
