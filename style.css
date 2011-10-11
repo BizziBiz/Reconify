@@ -18,8 +18,8 @@
 }
 
 #url_submit{
-	border: 1px solid #CCC;
-	background-color: orange;
+	border: 1px solid #eb4e0c;
+	background-color: #f15a24;
 	padding: 5px;
 	font-size: 14px;
 	color: #FFF;
@@ -27,4 +27,32 @@
 	margin-left: -72px;
 	margin-top: -2px;
 	font-weight: bold;
+}
+
+#loading{
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	width: 150px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+	font-family: Arial;
+	font-size: 12px;
+	background-color: #FFF;
+	position: relative;
+	top: 285px;
+}
+
+#loading .text{
+	margin-top: 5px;
+}
+
+#overlay{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: url(overlay.png) repeat 0 0;
 }

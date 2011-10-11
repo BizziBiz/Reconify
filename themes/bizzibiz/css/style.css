@@ -1,0 +1,170 @@
+body{
+	background-color: #efefef;
+	background-image: url(images/gray_bg.png);
+	font-family: Arial;
+}
+
+
+.block{
+	border-radius: 5px;
+	background-color: #FFF;
+	box-shadow: 0px 0px 5px #AAA;
+	margin-bottom: 30px;
+	padding: 10px;
+	background-image: url(images/white_bg.png);
+}
+
+.blockTitle{
+	text-align: right;
+	font-size: 20px;
+	color: #e85301;
+	margin-bottom: 10px;
+	text-transform: lowercase;
+}
+
+.blockDesc{
+	text-align: right;
+	margin-left: auto;
+	margin-right: 0px;
+	width: 65%;
+	color: #a9abaf;
+	font-size: 13px;
+	margin-bottom: 5px;
+}
+
+.blockInner{
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	font-size: 14px;
+}
+
+
+/* Header Stuff */
+
+#header_left .subtext{
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	font-size: 20px;
+	color: #636569;
+	margin-left: 150px;
+	margin-top: -25px;
+}
+
+#header_right #results{
+	background-image: url(images/white_bg.png);
+	width: 275px;
+	height: 85px;
+	margin-left: auto;
+	margin-right: 0px;
+	box-shadow: 0px 0px 5px #AAA;
+	border-radius: 5px;
+	margin-top: -15px;
+	margin-bottom: 30px;
+}
+
+
+#results #results_url{
+	background-color: #d8dadc;
+	font-size: 14px;
+	height: 13px; 
+	overflow: hidden;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	color: #636569;
+	text-align: center;
+}
+
+#results #results_grade{
+	width: 50%;
+	float: left;
+	border-right: 1px solid #d8dadc;
+}
+
+#results #results_score{
+	width: 50%;
+	float: left;
+}
+
+#results .label{
+	color: #a9abaf;
+	padding: 5px;
+}
+
+#results .value{
+	font-size: 24px;
+	color: #f15a24;
+	text-align: center;
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	padding-right: 10px;
+}
+
+.block table.lineitem:nth-child(odd){
+	background-color: #f3f3f3;
+}
+
+.blockInner{
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+.blockInner table.lineitem{
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.blockInner .lineitem .status{
+	width: 30px;
+}
+
+.blockInner .lineitem img{
+	vertical-align: middle;
+}
+
+.blockInner .lineitem .value{
+	text-align: right;
+}
+
+.blockInner .lineitem .tooltip{
+	margin-left: 5px;
+}
+
+#footer{
+	text-align: center;
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+a.tooltip{
+	cursor: default;
+}
+
+a.tooltip span {
+	display:none;
+	white-space: nowrap;
+	background: rgba(0, 0, 0, 0.85);
+	padding: 3px 7px;
+	color: #FFF;
+	border-radius: 3px;
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	margin-left: 7px;
+	margin-top: -3px;
+
+}
+
+a.tooltip:hover span{
+	display:inline;
+	position:absolute;
+}
+
+
