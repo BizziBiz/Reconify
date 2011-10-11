@@ -1,0 +1,22 @@
+<?php
+
+class google_analytics{
+	public function google_analytics(){
+		
+		$bTitle = 'User Conversion';
+		$bDesc = 'This section shows whether or not your business is actively trying to convert and track your customers through he sales process of your website.';
+		
+		theme::createBlock('cro', $bTitle, $bDesc);
+		
+		if(strpos(PAGE, 'google-analytics.com/ga.js') === false){
+			theme::addToBlock('cro', theme::lineItem('x', 'Google Analytics Installed', 'no'));
+			score::add(0,10);
+		}else{
+			theme::addToBlock('cro', theme::lineItem('check', 'Google Analytics Installed', 'yes'));
+			score::add(100,10);
+		}
+	}
+}
+
+
+?>

@@ -1,0 +1,46 @@
+<?php
+
+class social_media{
+	public function social_media(){
+		
+		$bTitle = 'Social Media';
+		$bDesc = 'This section shows if your business is participating in social media, and shows the effectiveness of your efforts.';
+		
+		theme::createBlock('smo', $bTitle, $bDesc);
+	
+	
+		if(strpos(PAGE, 'twitter.com/')){
+			theme::addToBlock('smo', theme::lineItem('check', 'Twitter Account Found', 'yes'));
+			score::add(100, 9);
+		}else{
+			theme::addToBlock('smo', theme::lineItem('x', 'Twitter Account Found', 'no'));
+			score::add(80, 9);
+		}
+		
+		if(strpos(PAGE, 'facebook.com/')){
+			theme::addToBlock('smo', theme::lineItem('check', 'Facebook Account Found', 'yes'));
+			score::add(100, 9);
+		}else{
+			theme::addToBlock('smo', theme::lineItem('x', 'Facebook Account Found', 'no'));
+			score::add(80, 9);
+		}
+		
+		
+		if(substr_count(PAGE, '/blog/') > 2){
+			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes'));
+			score::add(100, 9);
+		}else if(substr_count(PAGE, 'comment') > 2){
+			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes'));
+			score::add(100, 9);
+		}else if(substr_count(PAGE, 'read more') > 2){
+			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'probable'));
+			score::add(90, 9);
+		}else{
+			theme::addToBlock('smo', theme::lineItem('x', 'Blog Found', 'no'));
+			score::add(80, 9);
+		}
+	}
+}
+
+
+?>

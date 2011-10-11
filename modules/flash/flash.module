@@ -1,0 +1,32 @@
+<?php
+
+class flash{
+	public function flash(){
+		$items = array();
+		foreach(pq('object') as $obj){
+			array_push($items, $obj);
+		}
+	
+		$objs = count($items);
+		
+				
+		$bTitle = 'hosting + development';
+		$bDesc = 'This section looks at the actual code of the website, what it is built with, and if you have any coding and compliance issues.';	
+		
+		theme::createBlock('code', $bTitle, $bDesc);
+		
+		if($objs > 0){
+			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes'));
+			score::add(50, 6); 
+		}else if(strpos(PAGE, 'swfObject')){
+			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes', 'SWF Object'));
+			score::add(80, 6); 
+		}else{
+			theme::addToBlock('code', theme::lineItem('check', 'Adobe Flash Detected', 'no'));
+			score::add(100, 6); 
+		}
+	}
+}
+
+
+?>

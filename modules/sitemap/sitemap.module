@@ -1,0 +1,21 @@
+<?php
+
+class sitemap{
+	public function sitemap(){
+		$bTitle = 'Search Engine Optimization';
+		$bDesc = 'This section discusses how well your website is optimized in the eyes of the search engines. This looks at some of the most important variables and gives a pass/fail grade for each item.';
+		theme::createBlock('seo', $bTitle, $bDesc);
+		
+		$site = @file_get_contents(URL.'/sitemap.xml');
+		if($site && substr_count($site, 'urlset')){
+			theme::addToBlock('seo', theme::lineItem('check', 'Sitemap Detected', 'yes'));
+			score::add(100, 7); 
+		}else{
+			theme::addToBlock('seo', theme::lineItem('x', 'Sitemap Detected', 'no'));
+			score::add(70, 7); 
+		}
+	}
+}
+
+
+?>

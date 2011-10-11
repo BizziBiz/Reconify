@@ -4,15 +4,41 @@ class metatags{
 		$desc = pq('meta[name="description"]')->attr('content');
 		$len = strlen($desc);
 		
-		if($len > 165){
-			theme::display("Your meta description is too long! You have $len characters.");
+		$bTitle = 'Search Engine Optimization';
+		$bDesc = 'This section discusses how well your website is optimized in the eyes of the search engines. This looks at some of the most important variables and gives a pass/fail grade for each item.';
+		
+		theme::createBlock('seo', $bTitle, $bDesc);
+		
+		
+		/* Meta Description */
+		if($len > 155){
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Your desc was $len characters - this should be less than 155"));
+			$difference = $len - 155;
+			score::add((80 - $difference), 6); 
 		}else if ($len < 50){
-			theme::display("Your meta description is too short! You have $len characters.");
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Your desc was too $len characters - this should be more than 50 "));
+			$difference = 50 - $len;
+			score::add((70 - $difference), 6); 
 		}else{
-			theme::display("Your meta description is just right! You have $len characters.");
+			theme::addToBlock('seo', theme::lineItem('check', 'Meta Description Optimized', 'yes'));
+			score::add(100, 6); 
 		}
 		
-		//score::add(SCORE, WEIGHT)
+		/* Page Title */
+		$title = pq('title');
+		$titleLen = strlen($title);
+		if($titleLen > 70){
+			theme::addToBlock('seo', theme::lineItem('x', 'Page Title Optimized', 'no', 'Too Long!'));
+			score::add(80, 5); 
+		}else if($titleLen == 0){
+			theme::addToBlock('seo', theme::lineItem('x', 'Page Title Optimized', 'no', 'Not found!'));
+			score::add(60, 5); 
+		}else{
+			theme::addToBlock('seo', theme::lineItem('check', 'Page Title Optimized', 'yes'));
+			score::add(100, 5); 
+		}
+		
+		
 	}
 }
 

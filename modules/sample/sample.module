@@ -2,7 +2,6 @@
 
 class sample{
 	public function sample(){
-		
 	}
 }
 

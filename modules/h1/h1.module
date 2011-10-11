@@ -6,14 +6,26 @@ class h1{
 		foreach(pq('h1') as $h1){
 			array_push($h1s, $h1);
 		}
+
+		$bTitle = 'Search Engine Optimization';
+		$bDesc = 'This section discusses how well your website is optimized in the eyes of the search engines. This looks at some of the most important variables and gives a pass/fail grade for each item.';
+		
+		theme::createBlock('seo', $bTitle, $bDesc);
 		
 		$count = count($h1s);
 		
 		if($count > 1){
-			theme::display("Your H1s are not optimized, you have $count");
+			theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'You had more than one H1 tag. For optimal SEO try adjusting this to only one')); 
+			score::add(0, 10); 
+		}else if($count == 0){
+			 theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'Not Detected'));
+			score::add(60, 10); 
 		}else{
-			theme::display("Your H1s are optimized! You have $count");
+			theme::addToBlock('seo', theme::lineItem('check', 'Heading 1 Optimized', 'yes'));
+			score::add(100, 10); 
 		}
+		
+		
 	}
 }
 

@@ -1,0 +1,35 @@
+<?php
+
+class w3c{
+	public function w3c(){
+		set_time_limit(15);
+		$site = @file_get_contents('http://validator.w3.org/check?uri='.URL);
+				
+		$bTitle = 'hosting + development';
+		$bDesc = 'This section looks at the actual code of the website, what it is built with, and if you have any coding and compliance issues.';	
+		
+		theme::createBlock('code', $bTitle, $bDesc);
+		
+		if($site){
+			$w3c = phpQuery::newDocumentHTML($site);
+			$results = $w3c['h2']->text();
+			$class = $w3c['h2']->attr('class');
+			
+			if($class == 'valid'){
+				theme::addToBlock('code', theme::lineItem('check', 'W3C Validator', $results));
+				score::add(100, 8); 
+			}else{
+				$result = $w3c['td.invalid']->text();
+				theme::addToBlock('code', theme::lineItem('x', $results, $result));
+				score::add(70, 8); 
+			}
+			
+		}else{
+			theme::addToBlock('code', theme::lineItem('x', 'Could not load W3C validator. Please try back again later.',''));
+		}
+		set_time_limit(120);
+	}
+}
+
+
+?>

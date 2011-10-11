@@ -1,0 +1,28 @@
+<?php
+
+class iframe{
+	public function iframe(){
+		$iframe = array();
+		foreach(pq('iframe') as $frame){
+			array_push($iframe, $frame);
+		}
+		
+		$count = count($iframe);
+		
+		$bTitle = 'hosting + development';
+		$bDesc = 'This section looks at the actual code of the website, what it is built with, and if you have any coding and compliance issues.';	
+		
+		theme::createBlock('code', $bTitle, $bDesc);
+		
+		if($count > 0){
+			theme::addToBlock('code', theme::lineItem('x', 'iFrames Detected', 'yes'));
+			score::add(50, 8); 
+		}else{
+			theme::addToBlock('code', theme::lineItem('check', 'iFrames Detected', 'no'));
+			score::add(100, 8); 
+		}
+	}
+}
+
+
+?>

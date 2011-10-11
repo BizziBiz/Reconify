@@ -1,0 +1,32 @@
+<?php
+
+class image_alt{
+	public function image_alt(){
+		$imgResults = array();
+		
+		foreach(pq('img') as $img){
+			array_push($imgResults, pq($img)->attr('alt'));
+		}
+		
+		$before = count($imgResults);
+		$after = count(array_filter($imgResults));
+
+		$bTitle = 'Search Engine Optimization';
+		$bDesc = 'This section discusses how well your website is optimized in the eyes of the search engines. This looks at some of the most important variables and gives a pass/fail grade for each item.';
+		theme::createBlock('seo', $bTitle, $bDesc);
+		
+		$diff = $before - $after;
+		
+		if($diff == 0){
+			theme::addToBlock('seo', theme::lineItem('check', 'Images have ALT tags', 'yes'));
+			score::add(100, 6); 
+		}else{
+			theme::addToBlock('seo', theme::lineItem('x', 'Images have ALT tags', 'no', "$diff images are lacking alt tags"));
+			score::add(100 - ($diff * 10), 6); 
+		}
+		
+	}
+}
+
+
+?>
