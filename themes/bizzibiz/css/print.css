@@ -1,8 +1,116 @@
+/*
+@page{
+	margin: 10px;
+	size: 8.5in 11in;
+}
+*/
+
+body{
+	 font-family: Arial;
+	 counter-reset: page 1
+}
+
+@page{
+    @bottom-right {
+        content: counter(page)
+    }
+    @bottom-left{
+    	content: ""
+    }
+    
+}
+
+.blockTitle{
+	text-align: right;
+	font-size: 20px;
+	color: #e85301;
+	margin-bottom: 10px;
+	text-transform: lowercase;
+}
+
+.blockDesc{
+	text-align: right;
+	margin-left: auto;
+	margin-right: 0px;
+	width: 80%;
+	color: #a9abaf;
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+
+.blockInner{
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	font-size: 14px;
+}
+
+.blockInner table.lineitem{
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.blockInner .lineitem .status{
+	width: 30px;
+}
+
+.blockInner .lineitem img{
+	vertical-align: middle;
+	width: 80%;
+}
+
+.blockInner .lineitem .value{
+	text-align: right;
+}
+
+.blockInner .lineitem .tooltip{
+	margin-left: 5px;
+}
+
+.block{
+	margin-bottom: 20px;
+	padding: 10px;
+}
 
 .block{
 	box-shadow: none;
 	border: 1px solid #CCC;
 	border-radius: 5px;
+}
+
+
+/* Header Stuff */
+
+.logo img{
+	width: 200px;
+}
+
+#header_left{
+	width: 50%;
+	float: left;
+}
+
+#header_right{
+	width: 50%;
+	float: left;
+}
+
+#header_left .subtext{
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	font-size: 20px;
+	color: #636569;
+	margin-left: 100px;
+	margin-top: -25px;
+}
+
+#header_right #results{
+	width: 275px;
+	height: 85px;
+	margin-left: auto;
+	margin-right: 0px;
+	border-radius: 5px;
+	margin-bottom: 30px;
 }
 
 
@@ -12,6 +120,47 @@
 	border-radius: 5px;
 	padding: 5px;
 }
+
+
+#results #results_url{
+	background-color: #d8dadc;
+	font-size: 14px;
+	height: 13px; 
+	overflow: hidden;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	color: #636569;
+	text-align: center;
+}
+
+#results #results_grade{
+	width: 49%;
+	float: left;
+	border-right: 1px solid #d8dadc;
+}
+
+#results #results_score{
+	width: 50%;
+	float: left;
+}
+
+#results .label{
+	color: #a9abaf;
+	padding: 5px;
+}
+
+#results .value{
+	font-size: 24px;
+	color: #f15a24;
+	text-align: center;
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	padding-right: 10px;
+}
+
+
 #results #results_url{
 	border-bottom: 1px solid #CCC;
 }
@@ -32,4 +181,25 @@ a.tooltip img{
 
 a.tooltip span{
 	display: inline;
+	color: #A9ABAF;
+}
+
+.links{
+	display: none;
+}
+
+.clear{
+	clear: both;
+}
+
+#footer{
+	text-align: center;
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+#overlay{
+	display: none;
 }

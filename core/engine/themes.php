@@ -40,12 +40,33 @@ class theme{
 		return isset(theme::$content[$id]);
 	}
 
-	public static function loadTemplate($templatename){
-		theme::$template = file_get_contents(THEMEPATH."/$templatename/template.php");
+	private static function render ($file, $vars)
+	{
+	    $renderedHtml = '';
+	    $rawHtml = addcslashes (file_get_contents($file),'"\\');
+	    extract ($vars, EXTR_SKIP);
+	    eval('$renderedHtml = "'.$rawHtml.'";');
+	
+	    return $renderedHtml;
 	}
 	
-	public static function render(){
-		eval("?>".theme::$template."<?");
+	public static function loadTemplate($templatename){
+		$renderedHTML = theme::loadHTML($templatename);
+		if(GENERATE_PDF)
+			pdf::generatePDF($renderedHTML);
+		echo $renderedHTML;
+	}
+	
+	public static function loadHTML($templatename){
+		$tpl = array();
+		$tpl['url'] = URL;
+		$tpl['grade'] = score::getGrade();
+		$tpl['score'] = score::display();
+		$tpl['body'] = theme::display();
+		$tpl['pdf'] = pdf::getPDFName();
+		$tpl['pdfpath'] = pdf::getPDFPath();
+	
+		return theme::render(THEMEPATH."/$templatename/template.php", $tpl);
 	}
 	
 	public static function display(){

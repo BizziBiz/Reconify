@@ -2,7 +2,10 @@
 class metatags{
 	public function metatags(){
 		$desc = pq('meta[name="description"]')->attr('content');
+		$mtitle = pq('meta[name="title"]')->attr('content');
 		$len = strlen($desc);
+		$mLen = strlen($mtitle);
+		
 		
 		$bTitle = 'Search Engine Optimization';
 		$bDesc = 'This section discusses how well your website is optimized in the eyes of the search engines. This looks at some of the most important variables and gives a pass/fail grade for each item.';
@@ -12,17 +15,31 @@ class metatags{
 		
 		/* Meta Description */
 		if($len > 155){
-			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Your desc was $len characters - this should be less than 155"));
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Your description was $len characters - this should be less than 155"));
 			$difference = $len - 155;
 			score::add((80 - $difference), 6); 
-		}else if ($len < 50){
-			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Your desc was too $len characters - this should be more than 50 "));
-			$difference = 50 - $len;
-			score::add((70 - $difference), 6); 
+		}else if ($len == 0){
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Not detected"));
+			score::add(70, 6); 
 		}else{
 			theme::addToBlock('seo', theme::lineItem('check', 'Meta Description Optimized', 'yes'));
 			score::add(100, 6); 
 		}
+		
+		/* Meta Title */
+		if($mLen > 66){
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Title Optimized', 'no', "Your title was $len characters - this should be less than 66"));
+			$difference = $len - 66;
+			score::add((80 - $difference), 6); 
+		}else if ($mLen == 0){
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Title Optimized', 'no', "Not detected"));
+			score::add(70, 6); 
+		}else{
+			theme::addToBlock('seo', theme::lineItem('check', 'Meta Title Optimized', 'yes'));
+			score::add(100, 6); 
+		}
+		
+		
 		
 		/* Page Title */
 		$title = pq('title');

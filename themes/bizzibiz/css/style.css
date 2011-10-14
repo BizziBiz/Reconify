@@ -29,7 +29,7 @@ body{
 	width: 65%;
 	color: #a9abaf;
 	font-size: 13px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .blockInner{
@@ -167,4 +167,69 @@ a.tooltip:hover span{
 	position:absolute;
 }
 
+.links{
+	float: right;
+	width: 300px;
+	text-align: right;
+	margin-right: 15px;
+	margin-top: -15px;
+	margin-bottom: 13px;
+}
+
+.links div{
+	display: inline;
+	padding-left: 20px;
+}
+
+.links a{
+	color: #9b9c9e;
+	font-family: 'Volkhov', serif;
+	font-style: italic;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.links img{
+	padding-left: 8px;
+	vertical-align: bottom;
+}
+
+/* Overlay */
+
+#email_form{
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	width: 600px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+	font-family: Arial;
+	font-size: 12px;
+	background-color: #FFF;
+	position: relative;
+	top: 40%;
+}
+
+#email_form .left{
+	width: 50%;
+	display: inline;
+	border-right: 1px solid #CCC;
+}
+
+#email_form .right{
+	width: 50%;
+	display: inline;
+	text-align: right;
+}
+
+#overlay{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: url(images/overlay.png) repeat 0 0;
+}
 

@@ -1,0 +1,33 @@
+<?php
+define('APIKEY', 'AIzaSyDaD2OE7MyHaBIhXZr6l2d1IdW_oxssF5Q');
+
+class performance{
+	public function performance(){
+		$kbs = strlen(PAGE)/1000;
+		
+		$bTitle = 'Site Performance';
+		$bDesc = 'This section discusses how well your website is optimized for speed.';
+		theme::createBlock('performance', $bTitle, $bDesc);
+
+		$results = @file_get_contents('https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url='.URL.'&key='.APIKEY);
+		$pagespeed = json_decode($results);
+
+		if(isset($pagespeed->score)){ 
+			foreach($pagespeed->formattedResults->ruleResults as $rule){
+				if($rule->ruleScore >= 90){
+					theme::addToBlock('performance', theme::lineItem('check', $rule->localizedRuleName, 'good')); 
+				}else if($rule->ruleScore >= 75){
+					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes suggested')); 
+				}else{
+					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes recommended')); 
+				}
+				score::add($rule->ruleScore, 8);
+			}
+		}else{
+			theme::addToBlock('performance', theme::lineItem('x', 'Error loading pagespeed data. Please try again later.', '')); 
+		}
+	}
+}
+
+
+?>

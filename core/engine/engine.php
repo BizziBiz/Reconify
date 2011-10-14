@@ -2,6 +2,11 @@
 
 
 class engine{
+	private static $start;
+	private static $finish;
+	private static $loadtime;
+
+
 	public static function init(){
 		$url = $_POST['url'];
 		if (preg_match('|^https*://|', $url) === 0){
@@ -11,7 +16,7 @@ class engine{
 		define("URL", $url);
 		
 		ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)'); 
-		$site = file_get_contents(URL);
+		$site = @file_get_contents(URL);
 		
 		if($site){
 			define("PAGE", phpQuery::newDocumentHTML($site));
