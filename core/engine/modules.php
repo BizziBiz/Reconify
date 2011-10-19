@@ -6,8 +6,23 @@ class modules{
 
 	public static function run(){
 		modules::init();
+		$debug = array();
+		
 		foreach(modules::$modules as $module){
+			$timer = NULL;
+			if(DEBUGMODE)
+				$timer = engine::startTimer();
+			
 			modules::runModule($module);
+			
+			if(DEBUGMODE)
+				$debug[$module] = engine::stopTimer($timer);			
+		
+		}
+		
+		if(DEBUGMODE){
+			echo '[TIME REPORT]';
+			print_r($debug);
 		}
 	}
 	

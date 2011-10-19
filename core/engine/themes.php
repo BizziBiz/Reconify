@@ -36,6 +36,10 @@ class theme{
 	}
 	
 	
+	public static function createTable(){
+	
+	}
+	
 	private static function blockExists($id){
 		return isset(theme::$content[$id]);
 	}

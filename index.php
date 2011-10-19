@@ -7,9 +7,10 @@ include('core/engine/scoring.php');
 include('core/engine/themes.php');
 include('core/engine/email.php');
 
-define('GENERATE_PDF', true);
+define('GENERATE_PDF', false);
 define('DOCRAPTOR_API', 'hT80Up8AaqmHQvAspL7');
 define('DOCRAPTOR_TEST' , true);
+define('DEBUGMODE', true);
 
 if(isset($_GET['download'])){
 	pdf::download($_GET['download']);

@@ -3,7 +3,8 @@
 class w3c{
 	public function w3c(){
 		set_time_limit(15);
-		$site = @file_get_contents('http://validator.w3.org/check?uri='.URL);
+		//$site = @file_get_contents();
+		$site = engine::loadURL('http://validator.w3.org/check?uri='.URL);	
 				
 		$bTitle = 'hosting + development';
 		$bDesc = 'This section looks at the actual code of the website, what it is built with, and if you have any coding and compliance issues.';	

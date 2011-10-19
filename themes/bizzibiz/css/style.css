@@ -32,7 +32,8 @@ body{
 	margin-bottom: 10px;
 }
 
-.blockInner{
+.blockInner,
+.blockInner table{
 	font-family: 'Volkhov', serif;
 	font-style: italic;
 	font-size: 14px;
@@ -150,7 +151,7 @@ a.tooltip{
 
 a.tooltip span {
 	display:none;
-	white-space: nowrap;
+	max-width: 600px;
 	background: rgba(0, 0, 0, 0.85);
 	padding: 3px 7px;
 	color: #FFF;

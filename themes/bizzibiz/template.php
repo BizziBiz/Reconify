@@ -12,6 +12,7 @@
 	
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script language="javascript" src="http://www.google.com/jsapi"></script>
 </head>
 <body>
 
