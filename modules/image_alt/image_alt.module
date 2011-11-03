@@ -19,10 +19,13 @@ class image_alt{
 		
 		if($diff == 0){
 			theme::addToBlock('seo', theme::lineItem('check', 'Images have ALT tags', 'yes'));
-			score::add(100, 6); 
+			score::add(100, 1, 'wb', 'image_alt'); 
+			score::add(100, 1, 'dm', 'image_alt'); 
 		}else{
 			theme::addToBlock('seo', theme::lineItem('x', 'Images have ALT tags', 'no', "$diff images are lacking alt tags"));
-			score::add(100 - ($diff * 10), 6); 
+			
+			score::add((($after/$before) * 100), 1, 'wb', 'image_alt'); 
+			score::add((($after/$before) * 100), 1, 'dm', 'image_alt'); 
 		}
 		
 	}

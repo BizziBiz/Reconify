@@ -14,12 +14,16 @@ class iframe{
 		
 		theme::createBlock('code', $bTitle, $bDesc);
 		
+		$desc = 'iFrame technology has mostly fallen out of favor, however there are some use cases where it can still be used';
+		
 		if($count > 0){
-			theme::addToBlock('code', theme::lineItem('x', 'iFrames Detected', 'yes'));
-			score::add(50, 8); 
+			theme::addToBlock('code', theme::lineItem('x', 'iFrames Detected', 'yes', $desc));
+			score::add(30, 2, 'wb', 'iframe'); 
+			score::add(30, 2, 'dm', 'iframe'); 
 		}else{
-			theme::addToBlock('code', theme::lineItem('check', 'iFrames Detected', 'no'));
-			score::add(100, 8); 
+			theme::addToBlock('code', theme::lineItem('check', 'iFrames Detected', 'no', $desc));
+			score::add(100, 2, 'wb', 'iframe');
+			score::add(100, 2, 'dm', 'iframe'); 
 		}
 	}
 }

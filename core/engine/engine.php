@@ -20,7 +20,9 @@ class engine{
 		
 		if($site){
 			define("PAGE", phpQuery::newDocumentHTML($site));
+			logging::addRecord('status', 'engine', 'site_loaded', 'true');
 		}else{
+			logging::addRecord('status', 'engine', 'site_loaded', 'false');
 			die("Site could not be loaded");
 		}
 	}
@@ -38,7 +40,7 @@ class engine{
 		return $bizname;
 	}
 	
-	public static function loadURL($url, $timeout = 10){
+	public static function loadURL($url, $timeout = 10, $post = false){
 		$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,"; 
 		$header[0] .= "text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"; 
 		$header[] = "Cache-Control: max-age=0"; 
@@ -59,6 +61,12 @@ class engine{
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
 		curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); 
+		
+		if($post){
+		    curl_setopt($curl, CURLOPT_POST, true );
+		    curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+		}
+		
 		
 		$return = curl_exec($curl);
 		curl_close($curl);

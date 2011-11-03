@@ -2,6 +2,7 @@ body{
 	background-color: #efefef;
 	background-image: url(images/gray_bg.png);
 	font-family: Arial;
+	color: #6e6f73;
 }
 
 
@@ -94,7 +95,7 @@ body{
 }
 
 #results .value{
-	font-size: 24px;
+	font-size: 12px;
 	color: #f15a24;
 	text-align: center;
 	font-family: 'Volkhov', serif;
@@ -202,7 +203,6 @@ a.tooltip:hover span{
 	border: 1px solid #CCC;
 	border-radius: 5px;
 	width: 600px;
-	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 5px;
@@ -214,15 +214,46 @@ a.tooltip:hover span{
 }
 
 #email_form .left{
-	width: 50%;
-	display: inline;
+	width: 48%;
+	float: left;
 	border-right: 1px solid #CCC;
+	padding: 5px;
 }
 
 #email_form .right{
-	width: 50%;
-	display: inline;
-	text-align: right;
+	width: 48%;
+	float: right;
+	padding: 5px;
+}
+
+#email_form form input,
+#email_form form textarea{
+	display: block;
+	clear: left;
+	width: 90%;
+}
+
+#email_form form label{
+	padding-top: 5px;
+	display: block;
+	width: 90%;
+	clear: left;
+}
+
+.overlay_close{
+	width: 25px;
+	height: 25px;
+	border-radius: 25px;
+	border: 1px solid #888;
+	background-color: white;
+	color: #888;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin-right: -15px;
+	margin-top: -15px;
+	float: right;
+	cursor: pointer;
 }
 
 #overlay{
@@ -234,3 +265,67 @@ a.tooltip:hover span{
 	background: url(images/overlay.png) repeat 0 0;
 }
 
+.textlabel{
+	margin-top: 25px;
+	margin-left: 15px;
+	color: #A9ABAF;
+}
+
+.textlabel .orange{
+	margin-right: 10px;
+	color: #E85301;
+}
+
+.table_generic{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-collapse: collapse;
+}
+
+.table_generic thead{
+	color: #E85301;
+}
+
+.table_generic td{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.table_generic tbody tr:nth-child(odd) {
+	background-color: #F3F3F3;
+}
+
+.table_subblock{
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-collapse: collapse;
+}
+
+.table_subblock td{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.table_subblock .label{
+	background-color: #dedede;
+	border-bottom: 1px inset #CCC;
+}
+
+.table_subblock tbody tr:nth-child(odd){
+	background-color: #F3F3F3;
+}
+
+.w3c_logo{
+	padding-left: 10px;
+	vertical-align: sub;
+}

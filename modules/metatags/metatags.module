@@ -17,26 +17,32 @@ class metatags{
 		if($len > 155){
 			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Your description was $len characters - this should be less than 155"));
 			$difference = $len - 155;
-			score::add((80 - $difference), 6); 
+			score::add(60, 2, 'wb', 'meta_desc'); 
+			score::add(60, 2, 'dm', 'meta_desc'); 
 		}else if ($len == 0){
 			theme::addToBlock('seo', theme::lineItem('x', 'Meta Description Optimized', 'no', "Not detected"));
-			score::add(70, 6); 
+			score::add(40, 2, 'wb', 'meta_desc');
+			score::add(40, 2, 'dm', 'meta_desc'); 
 		}else{
-			theme::addToBlock('seo', theme::lineItem('check', 'Meta Description Optimized', 'yes'));
-			score::add(100, 6); 
+			theme::addToBlock('seo', theme::lineItem('check', 'Meta Description Optimized', 'yes', 'Your meta title has been optimized for length!'));
+			score::add(100, 2, 'wb', 'meta_desc'); 
+			score::add(100, 2, 'dm', 'meta_desc'); 
 		}
 		
 		/* Meta Title */
 		if($mLen > 66){
 			theme::addToBlock('seo', theme::lineItem('x', 'Meta Title Optimized', 'no', "Your title was $len characters - this should be less than 66"));
 			$difference = $len - 66;
-			score::add((80 - $difference), 6); 
+			score::add(60, 2, 'wb', 'meta_title'); 
+			score::add(60, 2, 'dm', 'meta_title'); 
 		}else if ($mLen == 0){
-			theme::addToBlock('seo', theme::lineItem('x', 'Meta Title Optimized', 'no', "Not detected"));
-			score::add(70, 6); 
+			theme::addToBlock('seo', theme::lineItem('x', 'Meta Title Optimized', 'no', "Not detected", 'Your meta title was not detected'));
+			score::add(40, 2, 'wb', 'meta_title');
+			score::add(40, 2, 'dm', 'meta_title'); 
 		}else{
-			theme::addToBlock('seo', theme::lineItem('check', 'Meta Title Optimized', 'yes'));
-			score::add(100, 6); 
+			theme::addToBlock('seo', theme::lineItem('check', 'Meta Title Optimized', 'yes', 'Your meta title has been optimized for length!'));
+			score::add(100, 2, 'wb', 'meta_title'); 
+			score::add(100, 2, 'dm', 'meta_title'); 
 		}
 		
 		
@@ -46,13 +52,16 @@ class metatags{
 		$titleLen = strlen($title);
 		if($titleLen > 70){
 			theme::addToBlock('seo', theme::lineItem('x', 'Page Title Optimized', 'no', 'Too Long!'));
-			score::add(80, 5); 
+			score::add(60, 1, 'wb', 'page_title'); 
+			score::add(60, 1, 'dm', 'page_title');
 		}else if($titleLen == 0){
 			theme::addToBlock('seo', theme::lineItem('x', 'Page Title Optimized', 'no', 'Not found!'));
-			score::add(60, 5); 
+			score::add(40, 1, 'wb', 'page_title');
+			score::add(40, 1, 'dm', 'page_title'); 
 		}else{
-			theme::addToBlock('seo', theme::lineItem('check', 'Page Title Optimized', 'yes'));
-			score::add(100, 5); 
+			theme::addToBlock('seo', theme::lineItem('check', 'Page Title Optimized', 'yes', 'Your page title has been optimized for length!'));
+			score::add(100, 1, 'wb', 'page_title'); 
+			score::add(100, 1, 'dm', 'page_title'); 
 		}
 		
 		

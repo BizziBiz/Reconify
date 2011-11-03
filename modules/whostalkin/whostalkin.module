@@ -1,0 +1,20 @@
+<?php
+
+//define('WHOSTALKIN_KEY', 'd451a2ac037d8899824fccf05d6ce286');
+
+class whostalkin{
+	public function whostalkin(){
+		//$key = unserialize(WHOSTALKIN_KEY);
+		
+		//echo 'http://api.whostalkin.com/search?q='.CLEANURL.'&key='.WHOSTALKIN_KEY;
+		//$result = engine::loadURL('http://api.whostalkin.com/search?q='.CLEANURL.'&key='.$key['key'].'&f=json&src[]=twitter&src[]=facebook&src[]=linkedin&from_ts=604800');
+		
+		if(!$result)
+			return;
+		
+		print_r($result);
+	}
+}
+
+
+?>

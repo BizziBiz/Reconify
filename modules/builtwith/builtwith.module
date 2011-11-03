@@ -1,0 +1,35 @@
+<?php
+class builtwith{
+	public function builtwith(){
+		$key = unserialize(BUILTWITH_KEY);
+		$response = engine::loadURL('http://api.builtwith.com/api.json?KEY=' . $key['key'] . '&LOOKUP=' . CLEANURL, 5);
+		
+		if(!$response){
+			logging::addRecord('error', 'module - builtwith', 'loading', 'no_response');
+			return;
+		}
+		
+		$response = json_decode($response);
+		
+		if(!is_array($response->Technologies)){
+			logging::addRecord('error', 'module - builtwith', 'loading', 'response_invalid');
+			return;
+		}
+	
+		$bTitle = 'hosting + development';
+		$bDesc = 'This section looks at the actual code of the website, what it is built with, and if you have any coding and compliance issues.';	
+		
+		theme::createBlock('code', $bTitle, $bDesc);
+				
+		// Items categories to display
+		$display = array('cms', 'javascript', 'Web Server', 'encoding');
+		
+		foreach($response->Technologies as $item){
+			if(in_array($item->Tag, $display))
+				theme::addToBlock('code', theme::lineItem('info', $item->Name, strtolower($item->Tag), $item->Description));
+		}
+	}
+}
+
+
+?>

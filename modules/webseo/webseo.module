@@ -1,0 +1,148 @@
+<?php
+
+class webseo{
+	public function webseo(){
+		$response = webseo::newReport(2);
+		
+		if(!$response)
+			return;
+		
+		$dmozDesc = 'DMOZ is the open directory project. Listing your site here will help improve your search engine rankings';
+		if($response->domainInfo->dmoz == '1'){
+			theme::addToBlock('seo', theme::lineItem('check', 'DMOZ Listed', 'yes', $dmozDesc));
+			score::add(100, 2, 'dm', 'dmoz_listed');
+		}else{
+			theme::addToBlock('seo', theme::lineItem('x', 'DMOZ Listed', 'no', $dmozDesc));
+			score::add(90, 2, 'dm', 'dmoz_listed');
+		}
+		
+		
+		$yahooDesc = 'Yahoo Directory listing will help improve your search engine rankings';
+		if($response->domainInfo->YahooDir == '1'){
+			theme::addToBlock('seo', theme::lineItem('check', 'Yahoo Directory Listed', 'yes', $yahooDesc));
+			score::add(100, 2, 'dm', 'yahoo_dir_listed');
+		}else{
+			theme::addToBlock('seo', theme::lineItem('x', 'Yahoo Directory Listed', 'no', $yahooDesc));
+			score::add(90, 2, 'dm', 'yahoo_dir_listed');
+		}
+		
+		theme::createBlock('seo2');
+		
+		$domRank = '';
+		
+		if($response->domainInfo->mainDomainPageRank == 'Unranked'){
+			$domRank = 'Unranked';
+			score::add(0, 2, 'dm', 'dom_rank');
+		}else{
+			$domRank = $response->domainInfo->mainDomainPageRank . '/10';
+			score::add($response->domainInfo->mainDomainPageRank * 10, 2, 'dm', 'dom_rank');
+		}
+		
+		$table = array(
+			array('Domain Authority', $response->domainInfo->domainAuthority . '/100'),
+			array('Domain Page Rank', $domRank),
+ 			array('Domain Trust', $response->domainInfo->trust),
+			array('Backlinks', number_format($response->domainInfo->majesticDataDomain->ExtBackLinks)), 
+			array('Estimated Visitors per month', number_format($response->trafficInfo->CompeteVisitors)), 
+		);
+		
+		score::add($response->domainInfo->domainAuthority, 1, 'dm', 'dom_authority');
+		if($response->domainInfo->trust == 'High'){
+			score::add(100, 2, 'dm', 'dom_trust');
+		}else if ($response->domainInfo->trust == 'Medium'){
+			score::add(70, 2, 'dm', 'dom_trust');
+		}else{
+			score::add(30, 2, 'dm', 'dom_trust');
+		}
+		
+		
+		theme::addToBlock('seo2', theme::addLabel('Other Info'));
+		theme::addToBlock('seo2', theme::createSubblock($table));
+		
+		webseo::deleteReport($response->{'@attributes'}->reportID);
+	}
+	
+	private function postInit(){
+		$key = unserialize(WEBSEO_KEY);
+	
+	    $string2sign = $key['userid']."\n".time();
+	    $authKey = base64_encode(hash_hmac('sha1',$string2sign,$key['key'],true));
+		$POSTparameters ='userID='.urlencode($key['userid']).'&authKey='.urlencode($authKey).'&timestamp='.urlencode(time()).'&format=json&lang=EN';	    $POSTparameters.='&subscriptionID='.$key['subid'];
+		return $POSTparameters;
+	}
+	
+	/*
+	 * If report could not be deleted, returns empty result set
+	 */
+	private function deleteReport($reportID){
+		$POSTparameters = webseo::postInit();
+	    $POSTparameters.='&reportID='.urlencode($reportID);
+		$response = engine::loadURL('http://www.webseoanalytics.com/api/1.1/deleteReport.php', 15, $POSTparameters);
+	
+		if(!$response){
+			logging::addRecord('error', 'module - webseo', 'loaded', 'no_response_delete_report');
+			return false;
+		}
+		
+		$response = json_decode($response);
+		return $response->ResultSet->output;
+	}
+	
+	private function newReport($toolID){
+		$POSTparameters = webseo::postInit();
+		$POSTparameters .='&toolID='.urlencode($toolID).'&url='.urlencode(URL).'&checkOtherSubdomain=0';
+		$response = engine::loadURL('http://www.webseoanalytics.com/api/1.1/newReport.php', 15, $POSTparameters);
+		
+		if(!$response){
+			logging::addRecord('error', 'module - webseo', 'loading', 'no_response_new_report');
+			return false;
+		}
+		
+		$response = json_decode($response);
+		return $response->ResultSet->output;
+	}
+	
+	private function viewList($toolID){
+		$POSTparameters = webseo::postInit();
+	    $POSTparameters.='&toolID='.urlencode($toolID);
+	    $response = engine::loadURL('http://www.webseoanalytics.com/api/1.1/viewList.php', 15, $POSTparameters);
+	    
+	    if(!$response){
+			logging::addRecord('error', 'module - webseo', 'loading', 'no_response_view_list');
+			return false;
+		}
+		
+		$response = json_decode($response);
+		return $response->ResultSet->output;
+	}
+	
+	private function viewReport($reportID){
+		$POSTparameters = webseo::postInit();
+	    $POSTparameters.='&reportID='.urlencode($reportID);    
+		$response = engine::loadURL('http://www.webseoanalytics.com/api/1.1/viewReport.php', 15, $POSTparameters);
+	
+		if(!$response){
+			logging::addRecord('error', 'module - webseo', 'loading', 'no_response_delete_report');
+			return false;
+		}
+		
+		$response = json_decode($response);
+		return $response->ResultSet->output;
+	}
+	
+	private function viewSubscriptions(){
+		$POSTparameters = webseo::postInit();
+		$response = engine::loadURL('http://www.webseoanalytics.com/api/1.1/viewSubscriptions.php', 15, $POSTparameters);
+		
+		if(!$response){
+			logging::addRecord('error', 'module - webseo', 'loading', 'no_response_view_subscriptions');
+			return false;
+		}
+		
+		$response = json_decode($response);
+		return $response->ResultSet->output;
+	}
+}
+
+
+?>

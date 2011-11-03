@@ -10,14 +10,13 @@ class modules{
 		
 		foreach(modules::$modules as $module){
 			$timer = NULL;
-			if(DEBUGMODE)
-				$timer = engine::startTimer();
+			$timer = engine::startTimer();
 			
 			modules::runModule($module);
 			
-			if(DEBUGMODE)
-				$debug[$module] = engine::stopTimer($timer);			
-		
+			$totalTime = engine::stopTimer($timer);
+			$debug[$module] = $totalTime;			
+			logging::addTimeRecord($module, $totalTime);
 		}
 		
 		if(DEBUGMODE){
@@ -30,6 +29,7 @@ class modules{
 		@include(MODPATH."$moduleName/$moduleName.module");
 		if(class_exists($moduleName)){
 			try{
+				define(strtoupper($moduleName).'_KEY', serialize(modules::loadKeyfile(MODPATH."$moduleName/$moduleName.key")));
 				$init = new $moduleName();
 			}catch(Exception $e){
 				die("Error in module $moduleName - $e");
@@ -49,6 +49,15 @@ class modules{
 			}
 		} 
 		closedir($od);
+	}
+	
+	private function loadKeyfile($path){
+		$content = @file_get_contents($path);
+		if(!$content)
+			return;
+			
+		// encode and decode to to prevent illegal values
+		return json_decode(json_encode((array) simplexml_load_string($content)),1);
 	}
 }
 

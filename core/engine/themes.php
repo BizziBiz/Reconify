@@ -24,20 +24,50 @@ class theme{
 		theme::$content[$id]['content'] .= $content;
 	}
 	
-	
-	/* REFACTOR THIS */
 	public static function lineItem($status, $title, $value, $long = ''){
 		$tooltip = '';
 		if($long != '')
-			$tooltip = "<a class='tooltip'><img src='css/images/q.png' width='20px' /><span>$long</span></a>";
+			$tooltip = theme::addTooltip($long);
 		
-
 		return "<table class='lineitem'><tr class='$status'><td class='status'><img src='css/images/$status.png' alt='$status'></td><td class='title'>$title $tooltip</td><td class='value'>$value</td></tr></table>";
 	}
 	
+	public static function addTooltip($description){
+		return "<a class='tooltip'><img src='css/images/q.png' width='20px' /><span>$description</span></a>";
+	}
 	
-	public static function createTable(){
+	public static function addLabel($title, $value = ''){
+		return "<div class='textlabel'><span class='orange'>$title</span>$value</div>";
+	}
 	
+	public static function createTable($colTitles = array(), $values = array()){
+		$output = '<table class="table_generic"><thead><tr>';
+		foreach($colTitles as $title){
+			$output .= "<td>$title</td>";
+		}
+		
+		$output .= '</tr></thead><tbody>';
+		foreach($values as $row){
+			$output .= '<tr>';
+			foreach($row as $cell){
+				$output .= "<td>$cell</td>";
+			}
+			$output .= '</tr>';
+		}
+		$output .= '</tbody></table>';
+		return $output;
+	}
+	
+	public static function createSubblock($values){
+		$output = '<table class="table_subblock"><tbody>';
+		foreach($values as $row){
+			$output .= '<tr>';
+			$output .= '<td class="label">'.$row[0].'</td>';
+			$output .= '<td class="value">'.$row[1].'</td>';
+			$output .= '</tr>';	
+		}
+		$output .= '</tbody></table>';
+		return $output;
 	}
 	
 	private static function blockExists($id){
@@ -64,8 +94,16 @@ class theme{
 	public static function loadHTML($templatename){
 		$tpl = array();
 		$tpl['url'] = URL;
-		$tpl['grade'] = score::getGrade();
-		$tpl['score'] = score::display();
+		$tpl['cleanurl'] = CLEANURL;
+		
+		foreach(score::getGradeLetters() as $key=>$value){
+			$tpl['grade_'.$key] = $value;	
+		}
+
+		foreach(score::getFormattedGrades() as $key=>$value){
+			$tpl['score_'.$key] = $value;
+		}
+		
 		$tpl['body'] = theme::display();
 		$tpl['pdf'] = pdf::getPDFName();
 		$tpl['pdfpath'] = pdf::getPDFPath();
@@ -75,6 +113,9 @@ class theme{
 	
 	public static function display(){
 		$output = '';
+		
+		ksort(theme::$content, SORT_STRING);
+		
 		foreach(theme::$content as $block){
 			$output .= $block['header'];
 			$output .= $block['title'];

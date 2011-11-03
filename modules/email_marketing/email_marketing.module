@@ -3,22 +3,24 @@
 class email_marketing{
 	public function email_marketing(){
 		$bTitle = 'User Conversion';
-		$bDesc = 'This section shows whether or not yoru business is actively trying to convert and track your customers through he sales process of your website.';
+		$bDesc = 'This section shows whether or not your business is actively trying to convert and track your customers through he sales process of your website.';
 		
 		theme::createBlock('cro', $bTitle, $bDesc);
+		
+		$desc = 'Email opt-in forms easily allow your users to sign up for your newsletters.';
 
 		if(count(pq('#mc_embed_signup')) > 0){
-			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', 'Mailchimp Found!'));
-			score::add(100, 6); 
+			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', $desc));
+			score::add(100, 4, 'dm', 'email_marketing'); 
 		}else if(substr_count(PAGE, 'infusionsoft.com') > 0){
-			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', 'Infusionsoft Found!'));
-			score::add(100, 6); 
+			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', $desc));
+			score::add(85, 4, 'dm', 'email_marketing'); 
 		}else if(count(pq(':submit[value="subscribe"]')) > 0){
-			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes'));
-			score::add(100, 6); 
+			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', $desc));
+			score::add(70, 4, 'dm', 'email_marketing'); 
 		}else{
-			theme::addToBlock('cro', theme::lineItem('x', 'Email Opt-In Detected', 'no'));
-			score::add(60, 6); 
+			theme::addToBlock('cro', theme::lineItem('x', 'Email Opt-In Detected', 'no', $desc));
+			score::add(50, 4, 'dm', 'email_marketing'); 
 		}
 	}
 }

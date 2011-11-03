@@ -27,11 +27,13 @@
 				<div id="results_url">{$url}</div>
 				<div id="results_grade">
 					<div class="label">grade</div>
-					<div class="value">{$grade}</div>
+					<div class="value">DM - {$grade_dm}</div>
+					<div class="value">WB - {$grade_wb}</div>
 				</div>
 				<div id="results_score">
 					<div class="label">score</div>
-					<div class="value">{$score}</div>
+					<div class="value">DM - {$score_dm}</div>
+					<div class="value">WB - {$score_wb}</div>
 				</div>
 			</div>
 			
@@ -58,19 +60,23 @@
 	</div>
 	<div id="overlay">
 			<div id="email_form">
+				<div class="overlay_close">x</div>
 				<div class="left">
 					<form action="index.php" method="post">
-						<label>To:</label><input type="text" name="to" id="email_to" />
-						<label>From:</label><input type="text" name="from" id="email_from" />
-						<textarea name="email_message"></textarea>
+						<label>To</label><input type="text" name="to" id="email_to" placeholder="email@site.com"/>
+						<label>From</label><input type="text" name="from" id="email_from" placeholder="email@site.com" />
+						<label>Message</label>
+						<textarea name="email_message" id="email_message" rows="5">Hey, I've run this quick report for {$url} and thought you might be interested!</textarea>
+						<label>Attachment: Quick Report PDF</label>
+						<input type="hidden" value="{$cleanurl}" id="email_url" />
 						<input type="button" value="Send" id="email_send"/>
 					</form>
 				</div>
 				<div class="right">
 					<h3>Send an email</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nibh sem, ullamcorper nec molestie quis, vehicula eu velit. In hac habitasse platea dictumst. Aliquam eu magna eu dolor lacinia convallis a sit amet magna. Fusce viverra, lorem ac molestie iaculis, nunc nisl sagittis ipsum, sed tempor nunc lacus vitae ligula.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nibh sem, ullamcorper nec molestie quis, vehicula eu velit. In hac habitasse platea dictumst.</p><p>Aliquam eu magna eu dolor lacinia convallis a sit amet magna. Fusce viverra, lorem ac molestie iaculis, nunc nisl sagittis ipsum, sed tempor nunc lacus vitae ligula.</p>
 				</div>
-				<div class="overlay_close">x</div>
+				<div class="clear"></div>
 			</div>
 	</div>
 	

@@ -1,0 +1,55 @@
+<html>
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('#go').click(function(){
+			//$('#go').attr('disabled', 'disabled');
+			$('#tester').hide();
+			$('#results').append('<h1>Results</h1><h4>Please wait for all results to load</h4>');
+			var lines = $('textarea[name=website_urls]').val().split('\n');
+			$.each(lines, function(){
+				var data = 'url=' + this;
+				var url = this;
+				$.ajax({
+				  type: 'POST',
+				  url: 'http://scan.dev50.com/index.php',
+				  data: data,
+				  success: function(resp){
+				  	var resp = $(resp);
+				  	var score = resp.find('#results_score').text();
+				  	//alert(test);
+				  	//alert(resp);
+				  	$('#results').append(url +'<br />');
+				  	$('#results').append(score);
+				  	$('#results').append('<hr>');
+				  }
+				});
+			});
+		});
+	});
+	</script>
+</head>
+<body>
+	<form id="tester" action="#">
+		<textarea name="website_urls" rows="10" style="width: 300px;">
+bizzibiz.com
+google.com
+yahoo.com
+facebook.com
+yelp.com
+bing.com
+penndutchstructures.com
+apple.com
+bryanlb.com
+redlinebsg.com
+elitemancaves.com
+elcapitanpmi.com
+premierscottsdalepetcare.com
+gottagetitclean.com
+doctorsonpurpose.com</textarea><br />
+		<button id="go">Go</button><div id="action"></div>
+	</form>
+	<div id="results"></div>
+</body>
+</html>

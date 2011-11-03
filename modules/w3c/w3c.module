@@ -4,12 +4,16 @@ class w3c{
 	public function w3c(){
 		set_time_limit(15);
 		//$site = @file_get_contents();
-		$site = engine::loadURL('http://validator.w3.org/check?uri='.URL);	
+		$site = engine::loadURL('http://validator.w3.org/check?uri='.URL);
 				
 		$bTitle = 'hosting + development';
 		$bDesc = 'This section looks at the actual code of the website, what it is built with, and if you have any coding and compliance issues.';	
 		
 		theme::createBlock('code', $bTitle, $bDesc);
+		
+		$desc = 'This checks the validity of your site\'s code to make sure that the search engines can read the code';
+		
+		$logo = '<a href="http://validator.w3.org/check?uri='.URL.'" target="_blank"><img src="css/images/w3c.png" alt="W3C" class="w3c_logo" /></a>';
 		
 		if($site){
 			$w3c = phpQuery::newDocumentHTML($site);
@@ -17,18 +21,20 @@ class w3c{
 			$class = $w3c['h2']->attr('class');
 			
 			if($class == 'valid'){
-				theme::addToBlock('code', theme::lineItem('check', 'W3C Validator', $results));
-				score::add(100, 8); 
+				theme::addToBlock('code', theme::lineItem('check', 'W3C Validator', $results.$logo, $desc));
+				score::add(100, 2, 'wb', 'w3c'); 
+				score::add(100, 2, 'dm', 'w3c'); 
 			}else{
 				$result = $w3c['td.invalid']->text();
-				theme::addToBlock('code', theme::lineItem('x', $results, $result));
-				score::add(70, 8); 
+				theme::addToBlock('code', theme::lineItem('x', $results, $results.$logo));
+				score::add(20, 2, 'wb', 'w3c'); 
+				score::add(20, 2, 'dm', 'w3c'); 
 			}
 			
 		}else{
-			theme::addToBlock('code', theme::lineItem('x', 'Could not load W3C validator. Please try back again later.',''));
+			logging::addRecord('error', 'module - w3c', 'loading', 'no_response');
+			theme::addToBlock('code', theme::lineItem('x', 'Could not load W3C validator. Please try back again later.','', $desc));
 		}
-		set_time_limit(120);
 	}
 }
 

@@ -1,0 +1,48 @@
+<?php
+
+class whois{
+	public function whois(){
+		$result = engine::loadURL('http://whoisxmlapi.com/whoisserver/WhoisService?domainName='.CLEANURL.'&outputFormat=json', 4);
+		
+		
+		if(!$result){
+			logging::addRecord('error', 'module - whois', 'loading', 'no_response');
+			return;
+		}
+		
+		if(isset($result->ErrorMessage->msg)){
+			logging::addRecord('error', 'module - whois', 'response error', $result->ErrorMessage->msg);
+			return;
+		}
+			
+		$result = json_decode($result);
+		$record = new DateTime($result->WhoisRecord->expiresDate);
+		
+		$today = new DateTime(date('d-M-y'));
+		$days = number_format(abs($today->format('U') - $record->format('U')) / (60*60*24), 1);
+		
+		if($days < 90){
+			score::add(0, 5, 'dm');
+		}else if(90 <= $days && $days < 180){
+			score::add(20, 5, 'dm');
+		}else if(180 <= $days && $days < 365){
+			score::add(40, 5, 'dm');
+		}else if(365 <= $days && $days < 1095){
+			score::add(60, 5, 'dm');
+		}else if(1095 <= $days && $days < 2190){
+			score::add(80, 5, 'dm');
+		}else if($days >= 2190){
+			score::add(100, 5, 'dm');
+		}
+		
+		if($days <= 1095){
+			theme::addToBlock('seo', theme::lineItem('x', 'Domain Expiration', 'changes recommended', 'Your domain expires in '.$days.' days. We recommend changing this to 3 or more years.')); 
+		}else{
+			theme::addToBlock('seo', theme::lineItem('check', 'Domain Expiration', 'good', 'Your domain does not expire for at least 1 year. We recommend having this at least 1 year.')); 
+		}
+
+	}
+}
+
+
+?>

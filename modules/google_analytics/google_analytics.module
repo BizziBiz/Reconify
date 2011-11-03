@@ -3,17 +3,16 @@
 class google_analytics{
 	public function google_analytics(){
 		
-		$bTitle = 'User Conversion';
-		$bDesc = 'This section shows whether or not your business is actively trying to convert and track your customers through he sales process of your website.';
-		
-		theme::createBlock('cro', $bTitle, $bDesc);
+		$desc = 'Google Analytics is a tool to track users that visit your site.';
 		
 		if(strpos(PAGE, 'google-analytics.com/ga.js') === false){
-			theme::addToBlock('cro', theme::lineItem('x', 'Google Analytics Installed', 'no'));
-			score::add(0,10);
+			theme::addToBlock('seo', theme::lineItem('x', 'Google Analytics Installed', 'no', $desc));
+			score::add(50, 2, 'wb', 'google_analytics');
+			score::add(50, 2, 'dm', 'google_analytics');
 		}else{
-			theme::addToBlock('cro', theme::lineItem('check', 'Google Analytics Installed', 'yes'));
-			score::add(100,10);
+			theme::addToBlock('seo', theme::lineItem('check', 'Google Analytics Installed', 'yes', $desc));
+			score::add(100, 2, 'wb', 'google_analytics');
+			score::add(100, 2, 'dm', 'google_analytics');
 		}
 	}
 }

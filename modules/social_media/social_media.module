@@ -9,35 +9,38 @@ class social_media{
 		theme::createBlock('smo', $bTitle, $bDesc);
 	
 	
+		$twDesc = 'Twitter is a microblogging service commonly used to engage your audience.';
 		if(strpos(PAGE, 'twitter.com/')){
-			theme::addToBlock('smo', theme::lineItem('check', 'Twitter Account Found', 'yes'));
-			score::add(100, 9);
+			theme::addToBlock('smo', theme::lineItem('check', 'Twitter Account Found', 'yes', $twDesc));
+			score::add(100, 3, 'dm', 'twitter_detected');
 		}else{
-			theme::addToBlock('smo', theme::lineItem('x', 'Twitter Account Found', 'no'));
-			score::add(80, 9);
+			theme::addToBlock('smo', theme::lineItem('x', 'Twitter Account Found', 'no', $twDesc));
+			score::add(30, 3, 'dm', 'twitter_detected');
 		}
 		
+		$fbDesc = 'Facebook is the most popular social media platform and is used globally';
 		if(strpos(PAGE, 'facebook.com/')){
-			theme::addToBlock('smo', theme::lineItem('check', 'Facebook Account Found', 'yes'));
-			score::add(100, 9);
+			theme::addToBlock('smo', theme::lineItem('check', 'Facebook Account Found', 'yes', $fbDesc));
+			score::add(100, 3, 'dm', 'facebook_detected');
 		}else{
-			theme::addToBlock('smo', theme::lineItem('x', 'Facebook Account Found', 'no'));
-			score::add(80, 9);
+			theme::addToBlock('smo', theme::lineItem('x', 'Facebook Account Found', 'no', $fbDesc));
+			score::add(30, 3, 'dm', 'facebook_detected');
 		}
 		
 		
+		$blogDesc = 'A blog will increase your user engagement';
 		if(substr_count(PAGE, '/blog/') > 2){
-			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes'));
-			score::add(100, 9);
+			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes', $blogDesc));
+			score::add(100, 2, 'dm', 'blog_detected');
 		}else if(substr_count(PAGE, 'comment') > 2){
-			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes'));
-			score::add(100, 9);
+			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes', $blogDesc));
+			score::add(100, 2, 'dm', 'blog_detected');
 		}else if(substr_count(PAGE, 'read more') > 2){
-			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'probable'));
-			score::add(90, 9);
+			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'probable', $blogDesc));
+			score::add(70, 2, 'dm', 'blog_detected');
 		}else{
-			theme::addToBlock('smo', theme::lineItem('x', 'Blog Found', 'no'));
-			score::add(80, 9);
+			theme::addToBlock('smo', theme::lineItem('x', 'Blog Found', 'no', $blogDesc));
+			score::add(40, 2, 'dm', 'blog_detected');
 		}
 	}
 }

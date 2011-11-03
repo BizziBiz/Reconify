@@ -175,6 +175,45 @@ body{
 	border-bottom: none;
 }
 
+.textlabel{
+	margin-top: 25px;
+	margin-left: 15px;
+	color: #A9ABAF;
+}
+
+.textlabel .orange{
+	margin-right: 10px;
+	color: #E85301;
+}
+
+.table_generic,
+.table_subblock{
+	width: 100%;
+}
+
+.table_generic thead{
+	color: #E85301;
+}
+
+.block table.table_generic,
+.block table.table_subblock{
+	margin-left: 5px;
+	width: 99%;
+	border-bottom: 1px dotted #CCC;
+}
+
+.block table.table_generic tbody tr:nth-child(odd),
+.block table.table_subblock tbody tr:nth-child(odd){
+	border-bottom: none;
+}
+
+
+.block table.table_generic tbody tr:nth-last-child(1),
+.block table.table_subblock tbody tr:nth-last-child(1){
+	border-bottom: none;
+}
+
+
 a.tooltip img{
 	display: none;
 }

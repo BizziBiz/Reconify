@@ -15,15 +15,20 @@ class flash{
 		
 		theme::createBlock('code', $bTitle, $bDesc);
 		
+		$desc = 'Adobe flash content cannot be viewed on most mobile devices, and is recommended only under very specific use cases.';
+		
 		if($objs > 0){
-			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes'));
-			score::add(50, 6); 
-		}else if(strpos(PAGE, 'swfObject')){
-			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes', 'SWF Object'));
-			score::add(80, 6); 
+			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes', $desc));
+			score::add(50, 3, 'wb', 'flash');
+			score::add(50, 3, 'dm', 'flash'); 
+		}else if(strpos(PAGE, 'swfObject')){ // SWF Object
+			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes', $desc));
+			score::add(75, 3, 'wb', 'flash'); 
+			score::add(75, 3, 'dm', 'flash'); 
 		}else{
-			theme::addToBlock('code', theme::lineItem('check', 'Adobe Flash Detected', 'no'));
-			score::add(100, 6); 
+			theme::addToBlock('code', theme::lineItem('check', 'Adobe Flash Detected', 'no', $desc));
+			score::add(100, 3, 'wb', 'flash'); 
+			score::add(100, 3, 'dm', 'flash'); 
 		}
 	}
 }

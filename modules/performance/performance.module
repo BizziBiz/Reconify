@@ -1,27 +1,43 @@
 <?php
-define('APIKEY', 'AIzaSyDaD2OE7MyHaBIhXZr6l2d1IdW_oxssF5Q');
-
 class performance{
 	public function performance(){
 		$kbs = strlen(PAGE)/1000;
+		$key = unserialize(PERFORMANCE_KEY);
 		
 		$bTitle = 'Site Performance';
 		$bDesc = 'This section discusses how well your website is optimized for speed.';
 		theme::createBlock('performance', $bTitle, $bDesc);
 
-		$results = @file_get_contents('https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url='.URL.'&key='.APIKEY);
+		$results = @file_get_contents('https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url='.URL.'&key='.$key['key']);
+		if(!$results){
+			logging::addRecord('error', 'module - performance', 'loading', 'no_response');
+		}
+		
 		$pagespeed = json_decode($results);
-
+		
+		
 		if(isset($pagespeed->score)){ 
 			foreach($pagespeed->formattedResults->ruleResults as $rule){
+				$desc = '';
+				
+				$desc = $rule->urlBlocks['0']->header->format;
+				
+				if(isset($rule->urlBlocks['0']->header->args))
+					foreach($rule->urlBlocks['0']->header->args as $key=>$arg){
+						$desc = str_replace('$'.($key+1), $arg->value, $desc);
+					}
+			
+			
 				if($rule->ruleScore >= 90){
 					theme::addToBlock('performance', theme::lineItem('check', $rule->localizedRuleName, 'good')); 
 				}else if($rule->ruleScore >= 75){
-					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes suggested')); 
+					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes suggested', $desc)); 
 				}else{
-					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes recommended')); 
+					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes recommended', $desc)); 
 				}
-				score::add($rule->ruleScore, 8);
+				
+				score::add($rule->ruleScore, 1, 'wb', 'performance - '.$rule->localizedRuleName);
+				score::add($rule->ruleScore, 2, 'dm', 'performance - '.$rule->localizedRuleName);
 			}
 		}else{
 			theme::addToBlock('performance', theme::lineItem('x', 'Error loading pagespeed data. Please try again later.', '')); 

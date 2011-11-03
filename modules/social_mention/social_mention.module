@@ -1,0 +1,72 @@
+<?php
+
+class social_mention{
+	public function social_mention(){
+		
+		/*
+		$key = unserialize(SOCIAL_MENTION_KEY);
+		$bizname = substr(CLEANURL, 0, strpos(CLEANURL, '.'));
+				
+		$result = engine::loadURL('http://api2.socialmention.com/search?q='.$bizname.'&f=json&src[]=twitter&src[]=facebook&src[]=linkedin&from_ts=604800&key='.$key['key'], 30);
+		
+		echo 'http://api2.socialmention.com/search?q='.$bizname.'&f=json&src[]=twitter&src[]=facebook&src[]=linkedin&from_ts=604800&key='.$key['key'];
+		
+		if(!$result)
+			return;
+			
+		$result = json_decode($result);
+		
+		$bTitle = 'Social Mentions';
+		$bDesc = 'This section shows recent mentions of your business in the last week';
+		
+		theme::createBlock('socialmention', $bTitle, $bDesc);
+		
+		//print_r($result);
+		
+		$counter = 0;
+		$collapse = '';
+		$uncollapse = '';
+		
+		foreach($result->items as $object){
+			//if($object->language != 'en' || $object->language != '')
+			//	return;
+				
+			$display = array();
+			
+			if($object->title)
+				array_push($display, array('Title', $object->title));
+			
+			if($object->description && ($object->description != $object->title))
+				array_push($display, array('Description', $object->description));
+			
+			if($object->link)
+				array_push($display, array('Link', '<a href="'.$object->link.'">'.$object->link.'</a>'));
+			
+			if($object->source)
+				array_push($display, array('Source', $object->source));
+				
+			if($object->user_image && $object->user_link != ''){
+				array_push($display, array('User Profile', '<a href="'.$object->user_link.'"><img src="'.$object->user_image.'"></a>'));
+			}else{
+				array_push($display, array('User Profile', '<a href="'.$object->user_link.'">'.$object->user_link.'</a>'));
+			}
+			
+			array_push($display, array('Time', date('l', $object->timestamp) . ' at ' .  date('g:i a', $object->timestamp)));
+			
+			if($counter >= 5){
+				$collapse .= theme::createSubblock($display);
+			}else{
+				$uncollapse .= theme::createSubblock($display);
+			}
+			
+			$counter++;
+		}
+		
+		theme::addToBlock('socialmention', $uncollapse);
+		theme::addToBlock('socialmention', '<div class="show_all"><a>Show All</a><div class="collapse">'.$collapse.'</div></div>');
+		*/
+	}
+}
+
+
+?>

@@ -5,15 +5,19 @@ class conversion_form{
 		$forms = count(pq(':submit:not([value*=search]))'));
 				
 		$bTitle = 'User Conversion';
-		$bDesc = 'This section shows whether or not yoru business is actively trying to convert and track your customers through he sales process of your website.';
+		$bDesc = 'This section shows whether or not your business is actively trying to convert and track your customers through he sales process of your website.';
+		
+		$desc = 'Conversion forms capture lead information for future followups';
 		
 		theme::createBlock('cro', $bTitle, $bDesc);
 		if($forms > 0){
-			theme::addToBlock('cro', theme::lineItem('check', 'Conversion Form Detected', 'yes'));
-			score::add(100, 4);
+			theme::addToBlock('cro', theme::lineItem('check', 'Conversion Form Detected', 'yes', $desc));
+			score::add(100, 3, 'wb', 'conversion_form');
+			score::add(100, 3, 'dm', 'conversion_form');
 		}else{
-			theme::addToBlock('cro', theme::lineItem('x', 'Conversion Form Detected', 'no'));
-			score::add(50, 4);
+			theme::addToBlock('cro', theme::lineItem('x', 'Conversion Form Detected', 'no', $desc));
+			score::add(50, 3, 'wb', 'conversion_form');
+			score::add(50, 3, 'dm', 'conversion_form');
 		}
 	}
 }

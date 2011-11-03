@@ -13,16 +13,25 @@ class h1{
 		theme::createBlock('seo', $bTitle, $bDesc);
 		
 		$count = count($h1s);
-		
+
 		if($count > 1){
-			theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'You had more than one H1 tag. For optimal SEO try adjusting this to only one')); 
-			score::add(0, 10); 
+			theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'You had more than one H1 tag. For optimal SEO try adjusting this to only one'));
+			$score = 0;
+			
+			if($count < 10){
+				$score = 100 - 5*$count;
+			}
+			
+			score::add($score, 3, 'wb', 'h1');
+			score::add($score, 3, 'dm', 'h1'); 
 		}else if($count == 0){
-			 theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'Not Detected'));
-			score::add(60, 10); 
+			theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'Not Detected'));
+			score::add(40, 1, 'wb', 'h1'); 
+			score::add(40, 1, 'dm', 'h1'); 
 		}else{
-			theme::addToBlock('seo', theme::lineItem('check', 'Heading 1 Optimized', 'yes'));
-			score::add(100, 10); 
+			theme::addToBlock('seo', theme::lineItem('check', 'Heading 1 Optimized', 'yes', 'You have exactly 1 H1 tag. This allows search engines to better optimize your page'));
+			score::add(100, 1, 'wb', 'h1'); 
+			score::add(100, 1, 'dm', 'h1'); 
 		}
 		
 		

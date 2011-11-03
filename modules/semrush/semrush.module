@@ -1,0 +1,102 @@
+<?php
+
+class semrush{
+	public function semrush(){
+		/*
+		* _organic: Organic Keywords report
+		* _adwords: AdWords keywords report
+		* _organic_organic: Competitors in organic
+		* _adwords_adwords: Competitors in adspend
+		*/
+		
+		// Initalize reports API
+		$report = array();
+		$report_types = array("domain_rank", "domain_organic", "domain_adwords", "domain_organic_organic", "domain_adwords_adwords");
+		foreach($report_types as $type){
+			$report[$type] = semrush::loadReport($type, '&domain='.CLEANURL);
+		}
+			
+		// Initalize block
+		$bTitle = 'Search Engine Marketing';
+		$bDesc = 'This section shows how your website is doing with SEM';
+		theme::createBlock('sem', $bTitle, $bDesc);
+		
+		theme::createBlock('seo2');
+		
+		// Add Stats section
+		theme::addToBlock('sem', theme::addLabel('Stats'));
+		$estimatedCPA = number_format($report['domain_rank'][0]['Adwords Cost']/($report['domain_rank'][0]['Adwords Traffic'] + '0.01'), 2);
+		$table = array(
+			array('Estimated Adwords Spend', '$'.number_format($report['domain_rank'][0]['Adwords Cost'])),
+			array('Estimated Adwords Visitors', number_format($report['domain_rank'][0]['Adwords Traffic'])),
+			array('Estimate CPA', '$'.$estimatedCPA)
+		);
+		theme::addToBlock('sem', theme::createSubblock($table));
+		
+		$dollarSpend = $report['domain_rank'][0]['Adwords Cost'];
+		
+		if($dollarSpend > 10 && $dollarSpend < 10000){
+			$score = 14.427 * log($dollarSpend) - 32.877;
+			$score = (int) $score;
+			score::add($score, 1, 'dm', 'adwords_spend');
+		}else if ($dollarSpend > 10000){
+			score::add(100, 1, 'dm', 'adwords_spend');
+		}else{
+			score::add(20, 1, 'dm', 'adwords_spend');
+		}
+		
+		// Organic keywords
+		$colTitles = array('Keyword', 'Position', 'Traffic');
+		$values = array();
+		foreach($report['domain_organic'] as $item){
+			array_push($values, array($item['Keyword'], $item['Pos'], $item['Traffic (%)'].'%'));
+		}
+		
+		if(count($values) != '0'){
+			$values = array_slice($values, 0, 10);
+			theme::addToBlock('seo2', theme::addLabel('Organic', 'Top 10 performing keywords'));
+			theme::addToBlock('seo2', theme::createTable($colTitles, $values));
+		}
+		
+		// Adwords keywords
+		$colTitles = array('Keyword', 'Traffic', 'CPC');
+		$values = array();
+		foreach($report['domain_adwords'] as $item){
+			array_push($values, array($item['Keyword'], $item['Traffic (%)'].'%', '$'.$item['CPC']));
+		}
+		
+		if(count($values) != '0'){
+			$values = array_slice($values, 0, 10);
+			theme::addToBlock('sem', theme::addLabel('Adwords', 'Top 10 performing adwords'));
+			theme::addToBlock('sem', theme::createTable($colTitles, $values));
+		}
+		
+	}
+	
+	private function loadReport($report, $args){
+		$key = unserialize(SEMRUSH_KEY);
+		$result = engine::loadURL('http://us.api.semrush.com/?action=report&type='.$report.'&key='.$key['key'].'&display_limit=10&display_offset=0&export=api'.$args, 18);
+		
+		if(!$result){
+			logging::addRecord('error', 'module - semrush', 'loading', 'no_response');
+		}
+		
+		$data = explode("\n", trim($result));
+		$keys = explode(';', trim($data[0]));
+		
+		$results = array();
+		foreach($data as $key1=>$row){
+			if($key1 != 0){
+				$values = explode(';', trim($row));
+				foreach($values as $key2=>$value){
+					$results[$key1-1][$keys[$key2]] = $value;
+				}
+			}
+		}
+		
+		return $results;
+	}
+}
+
+
+?>
