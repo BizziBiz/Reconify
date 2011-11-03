@@ -1,5 +1,4 @@
 <?php
-
 class email_marketing{
 	public function email_marketing(){
 		$bTitle = 'User Conversion';
@@ -24,6 +23,4 @@ class email_marketing{
 		}
 	}
 }
-
-
 ?>

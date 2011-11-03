@@ -1,5 +1,4 @@
 <?php
-
 class h1{
 	public function h1(){
 		$h1s = array();
@@ -33,10 +32,6 @@ class h1{
 			score::add(100, 1, 'wb', 'h1'); 
 			score::add(100, 1, 'dm', 'h1'); 
 		}
-		
-		
 	}
 }
-
-
 ?>

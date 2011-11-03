@@ -1,13 +1,13 @@
 <?php
 
-
 class engine{
 	private static $start;
 	private static $finish;
 	private static $loadtime;
 
-
 	public static function init(){
+		set_time_limit(180);
+		
 		$url = $_POST['url'];
 		if (preg_match('|^https*://|', $url) === 0){
         	$url = 'http://' . $url;
@@ -66,8 +66,7 @@ class engine{
 		    curl_setopt($curl, CURLOPT_POST, true );
 		    curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
 		}
-		
-		
+				
 		$return = curl_exec($curl);
 		curl_close($curl);
 
@@ -88,5 +87,4 @@ class engine{
 		return round(($time - $start), 4);
 	}
 }
-
 ?>

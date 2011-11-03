@@ -1,5 +1,4 @@
 <?php
-
 class logging{
 	private static $dbObj;
 	
@@ -28,8 +27,6 @@ class logging{
 	
 	public function __destruct(){
 		mysql_close(logging::$dbObj);
-	}
-	
+	}	
 }
-
 ?>

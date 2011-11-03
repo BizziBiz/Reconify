@@ -1,5 +1,4 @@
 <?php
-
 class image_alt{
 	public function image_alt(){
 		$imgResults = array();
@@ -23,13 +22,9 @@ class image_alt{
 			score::add(100, 1, 'dm', 'image_alt'); 
 		}else{
 			theme::addToBlock('seo', theme::lineItem('x', 'Images have ALT tags', 'no', "$diff images are lacking alt tags"));
-			
 			score::add((($after/$before) * 100), 1, 'wb', 'image_alt'); 
 			score::add((($after/$before) * 100), 1, 'dm', 'image_alt'); 
 		}
-		
 	}
 }
-
-
 ?>

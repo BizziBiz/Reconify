@@ -1,8 +1,4 @@
 <?php
-/*
-* Exponential decay model - weight 2 is 1/2 of weight 1, 3 is 1/2 of 2, etc
-*/
-
 class score{
 	private static $score = array();
 
@@ -19,7 +15,6 @@ class score{
 	
 	private static function calculateScores($silent = false){
 		score::cleanScores();
-		
 		$grpScores = score::groupScores();
 		
 		// Add all weights used to array
@@ -59,7 +54,6 @@ class score{
 			print_r(score::$score);
 		}
 		
-
 		// Calculate actual score
 		$finalSums = array();
 		foreach($grpScores as $key=>$category){
@@ -77,8 +71,6 @@ class score{
 			if(!$silent)
 				logging::addRecord('status', 'score', $key, $score);
 		}
-		
-		//$finalScore = ($finalSum/$potentialSum) * 100;
 		
 		return $finalScores;
 	}
@@ -107,9 +99,7 @@ class score{
 					break;
 			}
 		}
-		
 		return $return;
-		
 	}
 	
 	private static function groupScores(){
@@ -163,5 +153,4 @@ class score{
 		array_push(score::$score[$category], $tmp);
 	}
 }
-
 ?>

@@ -36,7 +36,6 @@
 					<div class="value">WB - {$score_wb}</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	<div class="clear"></div>
@@ -79,7 +78,6 @@
 				<div class="clear"></div>
 			</div>
 	</div>
-	
 </div>
 </body>
 </html>

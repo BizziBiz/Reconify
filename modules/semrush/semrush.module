@@ -1,5 +1,4 @@
 <?php
-
 class semrush{
 	public function semrush(){
 		/*
@@ -70,7 +69,6 @@ class semrush{
 			theme::addToBlock('sem', theme::addLabel('Adwords', 'Top 10 performing adwords'));
 			theme::addToBlock('sem', theme::createTable($colTitles, $values));
 		}
-		
 	}
 	
 	private function loadReport($report, $args){
@@ -93,10 +91,7 @@ class semrush{
 				}
 			}
 		}
-		
 		return $results;
 	}
 }
-
-
 ?>

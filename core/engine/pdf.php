@@ -1,14 +1,9 @@
 <?php
-define('PDF_DIR', 'files/'); 
-
 class pdf{
 	static public function generatePDF($inputHTML){
-		include('core/includes/DocRaptor/DocRaptor.class.php');
-		
 		// Delete file, if it exists
 		if(file_exists(pdf::getPDFPath()))
 			unlink(pdf::getPDFPath());
-		
 		
 		$docraptor = new DocRaptor(DOCRAPTOR_API);
 		$docraptor->setDocumentContent($inputHTML)->setDocumentType('pdf')->setTest(DOCRAPTOR_TEST)->setName(pdf::getPDFName());
@@ -37,5 +32,4 @@ class pdf{
 		}
 	}
 }
-
 ?>

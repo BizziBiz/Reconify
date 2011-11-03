@@ -1,5 +1,4 @@
 <?php
-
 class iframe{
 	public function iframe(){
 		$iframe = array();
@@ -27,6 +26,4 @@ class iframe{
 		}
 	}
 }
-
-
 ?>

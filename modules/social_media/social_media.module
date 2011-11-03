@@ -1,13 +1,10 @@
 <?php
-
 class social_media{
-	public function social_media(){
-		
+	public function social_media(){	
 		$bTitle = 'Social Media';
 		$bDesc = 'This section shows if your business is participating in social media, and shows the effectiveness of your efforts.';
 		
 		theme::createBlock('smo', $bTitle, $bDesc);
-	
 	
 		$twDesc = 'Twitter is a microblogging service commonly used to engage your audience.';
 		if(strpos(PAGE, 'twitter.com/')){
@@ -27,7 +24,6 @@ class social_media{
 			score::add(30, 3, 'dm', 'facebook_detected');
 		}
 		
-		
 		$blogDesc = 'A blog will increase your user engagement';
 		if(substr_count(PAGE, '/blog/') > 2){
 			theme::addToBlock('smo', theme::lineItem('check', 'Blog Found', 'yes', $blogDesc));
@@ -44,6 +40,4 @@ class social_media{
 		}
 	}
 }
-
-
 ?>

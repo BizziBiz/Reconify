@@ -15,7 +15,6 @@ class performance{
 		
 		$pagespeed = json_decode($results);
 		
-		
 		if(isset($pagespeed->score)){ 
 			foreach($pagespeed->formattedResults->ruleResults as $rule){
 				$desc = '';
@@ -26,7 +25,6 @@ class performance{
 					foreach($rule->urlBlocks['0']->header->args as $key=>$arg){
 						$desc = str_replace('$'.($key+1), $arg->value, $desc);
 					}
-			
 			
 				if($rule->ruleScore >= 90){
 					theme::addToBlock('performance', theme::lineItem('check', $rule->localizedRuleName, 'good')); 
@@ -44,6 +42,4 @@ class performance{
 		}
 	}
 }
-
-
 ?>

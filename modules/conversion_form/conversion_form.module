@@ -1,5 +1,4 @@
 <?php
-
 class conversion_form{
 	public function conversion_form(){
 		$forms = count(pq(':submit:not([value*=search]))'));
@@ -21,6 +20,4 @@ class conversion_form{
 		}
 	}
 }
-
-
 ?>

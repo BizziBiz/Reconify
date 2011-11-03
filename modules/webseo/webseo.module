@@ -1,5 +1,4 @@
 <?php
-
 class webseo{
 	public function webseo(){
 		$response = webseo::newReport(2);
@@ -15,7 +14,6 @@ class webseo{
 			theme::addToBlock('seo', theme::lineItem('x', 'DMOZ Listed', 'no', $dmozDesc));
 			score::add(90, 2, 'dm', 'dmoz_listed');
 		}
-		
 		
 		$yahooDesc = 'Yahoo Directory listing will help improve your search engine rankings';
 		if($response->domainInfo->YahooDir == '1'){
@@ -54,7 +52,6 @@ class webseo{
 		}else{
 			score::add(30, 2, 'dm', 'dom_trust');
 		}
-		
 		
 		theme::addToBlock('seo2', theme::addLabel('Other Info'));
 		theme::addToBlock('seo2', theme::createSubblock($table));
@@ -143,6 +140,4 @@ class webseo{
 		return $response->ResultSet->output;
 	}
 }
-
-
 ?>

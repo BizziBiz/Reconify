@@ -74,8 +74,6 @@ class DocRaptor {
 			foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; } 
 			$fields_string = 'doc[prince_options][media]=print&' . $fields_string;
 			
-//			echo $fields_string;
-			
 			rtrim($fields_string,'&');
 			$ch = curl_init();
 			curl_setopt($ch,CURLOPT_URL,$url);

@@ -6,12 +6,10 @@ class metatags{
 		$len = strlen($desc);
 		$mLen = strlen($mtitle);
 		
-		
 		$bTitle = 'Search Engine Optimization';
 		$bDesc = 'This section discusses how well your website is optimized in the eyes of the search engines. This looks at some of the most important variables and gives a pass/fail grade for each item.';
 		
 		theme::createBlock('seo', $bTitle, $bDesc);
-		
 		
 		/* Meta Description */
 		if($len > 155){
@@ -45,8 +43,6 @@ class metatags{
 			score::add(100, 2, 'dm', 'meta_title'); 
 		}
 		
-		
-		
 		/* Page Title */
 		$title = pq('title');
 		$titleLen = strlen($title);
@@ -63,9 +59,6 @@ class metatags{
 			score::add(100, 1, 'wb', 'page_title'); 
 			score::add(100, 1, 'dm', 'page_title'); 
 		}
-		
-		
 	}
 }
-
 ?>

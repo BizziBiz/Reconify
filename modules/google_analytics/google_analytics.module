@@ -1,5 +1,4 @@
 <?php
-
 class google_analytics{
 	public function google_analytics(){
 		
@@ -16,6 +15,4 @@ class google_analytics{
 		}
 	}
 }
-
-
 ?>

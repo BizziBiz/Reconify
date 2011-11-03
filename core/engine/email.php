@@ -1,9 +1,6 @@
 <?php
-
 class email{
 	public static function sendMail($vars){
-		$headers = 'From: '.$vars['from'];
-		
 		$return = email::mail_attachment($vars['url'].'.pdf', 'files/', $vars['to'], $vars['from'], $cars['from'], $vars['from'], 'New Quick Report from Bizzibiz!', stripcslashes(rawurldecode($vars['msg'])));
 		
 		if($return){
@@ -13,7 +10,7 @@ class email{
 		}
 	}
 	
-	function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $replyto, $subject, $message) {
+	private static function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $replyto, $subject, $message) {
 	    $file = $path.$filename;
 	    $file_size = filesize($file);
 	    

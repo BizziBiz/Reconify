@@ -1,10 +1,8 @@
 <?php
-
 class whois{
 	public function whois(){
 		$result = engine::loadURL('http://whoisxmlapi.com/whoisserver/WhoisService?domainName='.CLEANURL.'&outputFormat=json', 4);
-		
-		
+			
 		if(!$result){
 			logging::addRecord('error', 'module - whois', 'loading', 'no_response');
 			return;
@@ -40,9 +38,6 @@ class whois{
 		}else{
 			theme::addToBlock('seo', theme::lineItem('check', 'Domain Expiration', 'good', 'Your domain does not expire for at least 1 year. We recommend having this at least 1 year.')); 
 		}
-
 	}
 }
-
-
 ?>

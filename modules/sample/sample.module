@@ -1,9 +1,6 @@
 <?php
-
 class sample{
 	public function sample(){
 	}
 }
-
-
 ?>

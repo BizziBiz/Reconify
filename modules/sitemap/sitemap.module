@@ -1,5 +1,4 @@
 <?php
-
 class sitemap{
 	public function sitemap(){
 		$bTitle = 'Search Engine Optimization';
@@ -20,6 +19,4 @@ class sitemap{
 		}
 	}
 }
-
-
 ?>
