@@ -9,19 +9,19 @@ class social_media{
 		$twDesc = 'Twitter is a microblogging service commonly used to engage your audience.';
 		if(strpos(PAGE, 'twitter.com/')){
 			theme::addToBlock('smo', theme::lineItem('check', 'Twitter Account Found', 'yes', $twDesc));
-			score::add(100, 3, 'dm', 'twitter_detected');
+			score::add(100, 2, 'dm', 'twitter_detected');
 		}else{
 			theme::addToBlock('smo', theme::lineItem('x', 'Twitter Account Found', 'no', $twDesc));
-			score::add(30, 3, 'dm', 'twitter_detected');
+			score::add(40, 2, 'dm', 'twitter_detected');
 		}
 		
 		$fbDesc = 'Facebook is the most popular social media platform and is used globally';
 		if(strpos(PAGE, 'facebook.com/')){
 			theme::addToBlock('smo', theme::lineItem('check', 'Facebook Account Found', 'yes', $fbDesc));
-			score::add(100, 3, 'dm', 'facebook_detected');
+			score::add(100, 2, 'dm', 'facebook_detected');
 		}else{
 			theme::addToBlock('smo', theme::lineItem('x', 'Facebook Account Found', 'no', $fbDesc));
-			score::add(30, 3, 'dm', 'facebook_detected');
+			score::add(40, 2, 'dm', 'facebook_detected');
 		}
 		
 		$blogDesc = 'A blog will increase your user engagement';

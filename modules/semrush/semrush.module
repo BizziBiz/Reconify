@@ -41,7 +41,7 @@ class semrush{
 		}else if ($dollarSpend > 10000){
 			score::add(100, 1, 'dm', 'adwords_spend');
 		}else{
-			score::add(20, 1, 'dm', 'adwords_spend');
+			score::add(40, 1, 'dm', 'adwords_spend');
 		}
 		
 		// Organic keywords

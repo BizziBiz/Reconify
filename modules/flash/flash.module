@@ -17,16 +17,16 @@ class flash{
 		
 		if($objs > 0){
 			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes', $desc));
-			score::add(50, 3, 'wb', 'flash');
-			score::add(50, 3, 'dm', 'flash'); 
+			score::add(50, 2, 'wb', 'flash');
+			score::add(50, 2, 'dm', 'flash'); 
 		}else if(strpos(PAGE, 'swfObject')){ // SWF Object
 			theme::addToBlock('code', theme::lineItem('x', 'Adobe Flash Detected', 'yes', $desc));
-			score::add(75, 3, 'wb', 'flash'); 
-			score::add(75, 3, 'dm', 'flash'); 
+			score::add(75, 2, 'wb', 'flash'); 
+			score::add(75, 2, 'dm', 'flash'); 
 		}else{
 			theme::addToBlock('code', theme::lineItem('check', 'Adobe Flash Detected', 'no', $desc));
-			score::add(100, 3, 'wb', 'flash'); 
-			score::add(100, 3, 'dm', 'flash'); 
+			score::add(100, 2, 'wb', 'flash'); 
+			score::add(100, 2, 'dm', 'flash'); 
 		}
 	}
 }

@@ -26,16 +26,16 @@ define('DEBUGMODE', false);
 /*
  * Only Required if PDF Generation is true
  */
-define('DOCRAPTOR_API', 'hT80Up8AaqmHQvAspL7');
-define('DOCRAPTOR_TEST' , true);
+define('DOCRAPTOR_API', '');
+define('DOCRAPTOR_TEST' , false);
 
 /*
  * Database Connection Info
  */
-define('MYSQL_DB', 'quickreport');
-define('MYSQL_USR', 'qr');
-define('MYSQL_PASS', 'P8A2EDet');
-define('MYSQL_HOST', '192.168.1.2');
+define('MYSQL_DB', '');
+define('MYSQL_USR', '');
+define('MYSQL_PASS', '');
+define('MYSQL_HOST', '');
 
 /*
  * Direct Traffic

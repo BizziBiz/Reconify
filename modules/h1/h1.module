@@ -18,11 +18,12 @@ class h1{
 			$score = 0;
 			
 			if($count < 10){
-				$score = 100 - 5*$count;
+				$score = -7.4667*$count + 103.56;
+				//$score = 100 - 5*$count;
 			}
 			
-			score::add($score, 3, 'wb', 'h1');
-			score::add($score, 3, 'dm', 'h1'); 
+			score::add($score, 2, 'wb', 'h1');
+			score::add($score, 2, 'dm', 'h1'); 
 		}else if($count == 0){
 			theme::addToBlock('seo', theme::lineItem('x', 'Heading 1 Optimized', 'no', 'Not Detected'));
 			score::add(40, 1, 'wb', 'h1'); 

@@ -24,8 +24,8 @@ class w3c{
 			}else{
 				$result = $w3c['td.invalid']->text();
 				theme::addToBlock('code', theme::lineItem('x', $results, $results.$logo));
-				score::add(20, 2, 'wb', 'w3c'); 
-				score::add(20, 2, 'dm', 'w3c'); 
+				score::add(40, 2, 'wb', 'w3c'); 
+				score::add(40, 2, 'dm', 'w3c'); 
 			}
 		}else{
 			logging::addRecord('error', 'module - w3c', 'loading', 'no_response');

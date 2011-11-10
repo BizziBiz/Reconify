@@ -11,12 +11,12 @@ class conversion_form{
 		theme::createBlock('cro', $bTitle, $bDesc);
 		if($forms > 0){
 			theme::addToBlock('cro', theme::lineItem('check', 'Conversion Form Detected', 'yes', $desc));
-			score::add(100, 3, 'wb', 'conversion_form');
-			score::add(100, 3, 'dm', 'conversion_form');
+			score::add(100, 2, 'wb', 'conversion_form');
+			score::add(100, 2, 'dm', 'conversion_form');
 		}else{
 			theme::addToBlock('cro', theme::lineItem('x', 'Conversion Form Detected', 'no', $desc));
-			score::add(50, 3, 'wb', 'conversion_form');
-			score::add(50, 3, 'dm', 'conversion_form');
+			score::add(50, 2, 'wb', 'conversion_form');
+			score::add(50, 2, 'dm', 'conversion_form');
 		}
 	}
 }

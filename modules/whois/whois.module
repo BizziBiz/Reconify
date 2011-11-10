@@ -8,29 +8,30 @@ class whois{
 			return;
 		}
 		
+		$result = json_decode($result);
+		
 		if(isset($result->ErrorMessage->msg)){
 			logging::addRecord('error', 'module - whois', 'response error', $result->ErrorMessage->msg);
 			return;
-		}
-			
-		$result = json_decode($result);
+		}	
+		
 		$record = new DateTime($result->WhoisRecord->expiresDate);
 		
 		$today = new DateTime(date('d-M-y'));
 		$days = number_format(abs($today->format('U') - $record->format('U')) / (60*60*24), 1);
 		
 		if($days < 90){
-			score::add(0, 5, 'dm');
+			score::add(0, 5, 'dm', 'whois');
 		}else if(90 <= $days && $days < 180){
-			score::add(20, 5, 'dm');
+			score::add(20, 5, 'dm', 'whois');
 		}else if(180 <= $days && $days < 365){
-			score::add(40, 5, 'dm');
+			score::add(40, 5, 'dm', 'whois');
 		}else if(365 <= $days && $days < 1095){
-			score::add(60, 5, 'dm');
+			score::add(60, 5, 'dm', 'whois');
 		}else if(1095 <= $days && $days < 2190){
-			score::add(80, 5, 'dm');
+			score::add(80, 5, 'dm', 'whois');
 		}else if($days >= 2190){
-			score::add(100, 5, 'dm');
+			score::add(100, 5, 'dm', 'whois');
 		}
 		
 		if($days <= 1095){

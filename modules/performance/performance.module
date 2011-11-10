@@ -34,8 +34,13 @@ class performance{
 					theme::addToBlock('performance', theme::lineItem('x', $rule->localizedRuleName, 'changes recommended', $desc)); 
 				}
 				
-				score::add($rule->ruleScore, 1, 'wb', 'performance - '.$rule->localizedRuleName);
-				score::add($rule->ruleScore, 2, 'dm', 'performance - '.$rule->localizedRuleName);
+				$score = $rule->ruleScore;
+				if($score < 40){
+					$score = 40;
+				}
+				
+				score::add($score, 3, 'wb', 'performance - '.$rule->localizedRuleName);
+				score::add($score, 3, 'dm', 'performance - '.$rule->localizedRuleName);
 			}
 		}else{
 			theme::addToBlock('performance', theme::lineItem('x', 'Error loading pagespeed data. Please try again later.', '')); 

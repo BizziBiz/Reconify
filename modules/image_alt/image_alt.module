@@ -22,8 +22,18 @@ class image_alt{
 			score::add(100, 1, 'dm', 'image_alt'); 
 		}else{
 			theme::addToBlock('seo', theme::lineItem('x', 'Images have ALT tags', 'no', "$diff images are lacking alt tags"));
-			score::add((($after/$before) * 100), 1, 'wb', 'image_alt'); 
-			score::add((($after/$before) * 100), 1, 'dm', 'image_alt'); 
+			
+			if($diff > 10){
+				score::add(40, 1, 'wb', 'image_alt');
+				score::add(40, 1, 'dm', 'image_alt');
+			}else{
+				// 1 to 4, 4 = 9  or value X
+				// X/score * 100
+				//$x = ;
+				
+				score::add(-7.4667*$diff + 103.56, 1, 'wb', 'image_alt');
+				score::add(-7.4667*$diff + 103.56, 1, 'dm', 'image_alt');
+			}
 		}
 	}
 }

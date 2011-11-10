@@ -10,16 +10,16 @@ class email_marketing{
 
 		if(count(pq('#mc_embed_signup')) > 0){
 			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', $desc));
-			score::add(100, 4, 'dm', 'email_marketing'); 
+			score::add(100, 3, 'dm', 'email_marketing'); 
 		}else if(substr_count(PAGE, 'infusionsoft.com') > 0){
 			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', $desc));
-			score::add(85, 4, 'dm', 'email_marketing'); 
+			score::add(85, 3, 'dm', 'email_marketing'); 
 		}else if(count(pq(':submit[value="subscribe"]')) > 0){
 			theme::addToBlock('cro', theme::lineItem('check', 'Email Opt-In Detected', 'yes', $desc));
-			score::add(70, 4, 'dm', 'email_marketing'); 
+			score::add(70, 3, 'dm', 'email_marketing'); 
 		}else{
 			theme::addToBlock('cro', theme::lineItem('x', 'Email Opt-In Detected', 'no', $desc));
-			score::add(50, 4, 'dm', 'email_marketing'); 
+			score::add(50, 3, 'dm', 'email_marketing'); 
 		}
 	}
 }

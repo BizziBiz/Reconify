@@ -30,7 +30,7 @@ class webseo{
 		
 		if($response->domainInfo->mainDomainPageRank == 'Unranked'){
 			$domRank = 'Unranked';
-			score::add(0, 2, 'dm', 'dom_rank');
+			score::add(4, 2, 'dm', 'dom_rank');
 		}else{
 			$domRank = $response->domainInfo->mainDomainPageRank . '/10';
 			score::add($response->domainInfo->mainDomainPageRank * 10, 2, 'dm', 'dom_rank');
@@ -44,13 +44,13 @@ class webseo{
 			array('Estimated Visitors per month', number_format($response->trafficInfo->CompeteVisitors)), 
 		);
 		
-		score::add($response->domainInfo->domainAuthority, 1, 'dm', 'dom_authority');
+		score::add($response->domainInfo->domainAuthority, 2, 'dm', 'dom_authority');
 		if($response->domainInfo->trust == 'High'){
 			score::add(100, 2, 'dm', 'dom_trust');
 		}else if ($response->domainInfo->trust == 'Medium'){
 			score::add(70, 2, 'dm', 'dom_trust');
 		}else{
-			score::add(30, 2, 'dm', 'dom_trust');
+			score::add(40, 2, 'dm', 'dom_trust');
 		}
 		
 		theme::addToBlock('seo2', theme::addLabel('Other Info'));
